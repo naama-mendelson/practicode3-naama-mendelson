@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>יצירת טיוטת מייל</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            direction: rtl;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: #fff;
+            padding: 25px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #bbb;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #005db0;
+        }
+
+        .info-box {
+            background: #e8f4ff;
+            border-left: 5px solid #0078d7;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #003b73;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>יצירת טיוטת מייל</h2>
+
+    <label>נושא:</label>
+    <input type="text" id="subject">
+
+    <label>נמען/ים (מופרדים בפסיק):</label>
+    <input type="text" id="recipients">
+
+    <label>גוף ההודעה:</label>
+    <textarea id="body"></textarea>
+
+    <div class="info-box">
+        📎 <b>צירוף קובץ לקובץ המייל</b><br>
+        לאחר לחיצה על "פתח טיוטה", תיפתח חלונית לבחירת קובץ מהמחשב.
+        <br>הקובץ שתבחרו יצורף אוטומטית לטיוטת המייל.
+    </div>
+
+    <button onclick="openDraft()">פתח טיוטה</button>
+
+    <p class="note">
+        * מטעמי אבטחה, דפדפן אינו יכול להעביר ליישום חיצוני נתיב מלא לקובץ מקומי.
+        לכן בחירת הקובץ מתבצעת בשלב פתיחת הטיוטה, דרך האפליקציה המקומית.
+    </p>
+
+</div>
+
+<script>
+    function openDraft() {
+        let subject = encodeURIComponent(document.getElementById("subject").value);
+        let recipients = encodeURIComponent(document.getElementById("recipients").value);
+        let body = encodeURIComponent(document.getElementById("body").value);
+
+        // בניית כתובת הפרוטוקול (ללא קובץ — בחירת הקובץ תיעשה ב-EXE)
+        let url = `emaildraft://open?subject=${subject}&recipients=${recipients}&body=${body}`;
+
+        window.location.href = url;
+    }
+</script>
+
+</body>
+</html>
